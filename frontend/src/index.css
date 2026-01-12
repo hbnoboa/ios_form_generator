@@ -1,0 +1,36 @@
+/* Dark theme for cards and tables */
+:root {
+  --primary-dark: #23272b;
+  --secondary-dark: #343a40;
+  --text-light: #f8f9fa;
+}
+
+.card,
+.form-control,
+.form-select {
+  background: var(--secondary-dark) !important;
+  color: var(--text-light) !important;
+  border-color: #fff !important;
+}
+
+.card {
+  border: 1.5px solid #fff !important;
+  background: var(--secondary-dark) !important;
+  color: var(--text-light) !important;
+}
+
+table,
+.table,
+.table-dark,
+.table-striped {
+  background: var(--secondary-dark) !important;
+  color: var(--text-light) !important;
+  border-color: #fff !important;
+}
+
+th,
+td {
+  background: var(--secondary-dark) !important;
+  color: var(--text-light) !important;
+  border-color: #fff !important;
+}
