@@ -1,0 +1,13 @@
+{
+  "name": "ios_form_generator_root",
+  "version": "1.0.0",
+  "description": "IOS Form Generator - Monorepo",
+  "scripts": {
+    "start": "cd backend && npm start",
+    "install-backend": "cd backend && npm install",
+    "heroku-postbuild": "cd backend && npm install"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
