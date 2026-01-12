@@ -15,8 +15,16 @@ app.use(express.json({ limit: "20mb" }));
 app.use(express.urlencoded({ limit: "20mb", extended: true }));
 app.use(express.json());
 
-const serviceAccount = require(process.env.FIREBASE_SERVICE_ACCOUNT_PATH ||
-  "./serviceAccountKey.json");
+let serviceAccount;
+
+if (process.env.FIREBASE_SERVICE_ACCOUNT) {
+  // Heroku: credentials from environment variable
+  serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+} else {
+  // Local: credentials from file
+  serviceAccount = require("./serviceAccountKey.json");
+}
+
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
