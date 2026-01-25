@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const http = require("http");
+const path = require("path");
 const { Server } = require("socket.io");
 
 const admin = require("firebase-admin");
@@ -40,17 +41,20 @@ const recordRoute = require("./routes/record");
 const subrecordRoute = require("./routes/subrecord");
 const logRoute = require("./routes/log");
 
-// Health check route
-app.get("/", (req, res) => {
-  res.json({ status: "ok", message: "IOS Forms API is running" });
-});
-
 app.use("/api/users", userRoute);
 app.use("/api/forms", authMiddleware, formRoute);
 app.use("/api/subforms", authMiddleware, subformRoute);
 app.use("/api/records", authMiddleware, recordRoute);
 app.use("/api/subrecords", authMiddleware, subrecordRoute);
 app.use("/api/logs", authMiddleware, logRoute);
+
+// Serve frontend static files
+app.use(express.static(path.join(__dirname, "../frontend/build")));
+
+// Handle React routing, return all requests to React app
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
+});
 
 io.on("connection", (socket) => {
   console.log("Novo cliente conectado:", socket.id);
