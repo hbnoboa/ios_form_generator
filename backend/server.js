@@ -40,6 +40,11 @@ const recordRoute = require("./routes/record");
 const subrecordRoute = require("./routes/subrecord");
 const logRoute = require("./routes/log");
 
+// Health check route
+app.get("/", (req, res) => {
+  res.json({ status: "ok", message: "IOS Forms API is running" });
+});
+
 app.use("/api/users", userRoute);
 app.use("/api/forms", authMiddleware, formRoute);
 app.use("/api/subforms", authMiddleware, subformRoute);
