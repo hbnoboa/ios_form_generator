@@ -51,8 +51,8 @@ app.use("/api/logs", authMiddleware, logRoute);
 // Serve frontend static files
 app.use(express.static(path.join(__dirname, "../frontend/build")));
 
-// Handle React routing, return all requests to React app
-app.get("*", (req, res) => {
+// Handle React routing, return all requests to React app (Express 5 syntax)
+app.get("/{*splat}", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
 });
 
